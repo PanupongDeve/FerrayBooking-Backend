@@ -6,6 +6,10 @@ const fs = require('fs');
 const morgan = require('morgan');
 const path = require('path');
 const helmet = require('helmet');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 
 class SetupMiddleware {
     constructor() {
@@ -25,6 +29,13 @@ class SetupMiddleware {
         this.app.use(morgan('common', {
             stream: fs.createWriteStream(path.join(__dirname, `access.log`), {flags: 'a'})
           }))
+        this.app.use(session({ 
+            secret: 'keyboard cat',
+            resave: false,
+            saveUninitialized: true, 
+            cookie: { maxAge: expiryDate }
+        }));
+        this.app.use(cookieParser());
         
         //use static folder
         this.app.use(express.static('public'));
