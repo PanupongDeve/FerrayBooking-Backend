@@ -51,9 +51,10 @@ class Mysql {
 
     async mountModel(sequelize, DataTypes) {
         const model = {};
-        // model.user = require('./model/User')(sequelize, DataTypes);
-        // model.owner = require('./model/Owner')(sequelize, DataTypes);
-        // model.cat = require('./model/Cat')(sequelize, DataTypes);
+        model.orders = require('./model/Order')(sequelize, DataTypes);
+        model.tripinfos = require('./model/Tripinfo')(sequelize, DataTypes);
+
+        model.orderTripinfo = require('./model/OrderTripinfo')(sequelize, DataTypes);
 
         await this.mountSync(model);
         await this.mountRelation(model);
@@ -67,11 +68,11 @@ class Mysql {
          * ทำการสร้าง database
          * model.owner.sync({force: true}); --> สร้างดาต้าเบสอันใหม่โดยลบข้อมูลออกหมด
          */
+        await model.orders.sync();
+        await model.tripinfos.sync();
         
-        // await model.user.sync();
-        // await model.owner.sync();
-        // await model.cat.sync();
-        
+ 
+        await model.orderTripinfo.sync();
     }
 
     async mountRelation(model) {
@@ -80,6 +81,9 @@ class Mysql {
          * 
          */
         // model.owner.hasMany(model.cat);
+
+        model.orders.belongsToMany(model.tripinfos, { through: { model: model.orderTripinfo } });
+        model.tripinfos.belongsToMany(model.orders, { through: { model: model.orderTripinfo } });
     }
 
     
