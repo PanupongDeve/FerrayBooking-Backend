@@ -53,8 +53,14 @@ class Mysql {
         const model = {};
         model.orders = require('./model/Order')(sequelize, DataTypes);
         model.tripinfos = require('./model/Tripinfo')(sequelize, DataTypes);
+        model.pickups = require('./model/Pickup')(sequelize, DataTypes);
+        model.dropoffs = require('./model/Dropoff')(sequelize, DataTypes);
+        model.payments = require('./model/Payment')(sequelize, DataTypes);
 
         model.orderTripinfo = require('./model/OrderTripinfo')(sequelize, DataTypes);
+        model.orderPickup = require('./model/OrderPickup')(sequelize, DataTypes);
+        model.orderDropoff = require('./model/OrderDropoff')(sequelize, DataTypes);
+        model.orderPayment= require('./model/OrderPayment')(sequelize, DataTypes);
 
         await this.mountSync(model);
         await this.mountRelation(model);
@@ -70,9 +76,14 @@ class Mysql {
          */
         await model.orders.sync();
         await model.tripinfos.sync();
+        await model.pickups.sync();
+        await model.dropoffs.sync();
+        await model.payments.sync();
         
- 
         await model.orderTripinfo.sync();
+        await model.orderPickup.sync();
+        await model.orderDropoff.sync();
+        await model.orderPayment.sync();
     }
 
     async mountRelation(model) {
@@ -84,6 +95,15 @@ class Mysql {
 
         model.orders.belongsToMany(model.tripinfos, { through: { model: model.orderTripinfo } });
         model.tripinfos.belongsToMany(model.orders, { through: { model: model.orderTripinfo } });
+
+        model.orders.belongsToMany(model.pickups, { through: { model: model.orderPickup } });
+        model.pickups.belongsToMany(model.orders, { through: { model: model.orderPickup } });
+
+        model.orders.belongsToMany(model.dropoffs, { through: { model: model.orderDropoff } });
+        model.dropoffs.belongsToMany(model.orders, { through: { model: model.orderDropoff } });
+
+        model.orders.belongsToMany(model.payments, { through: { model: model.orderPayment } });
+        model.payments.belongsToMany(model.orders, { through: { model: model.orderPayment } });
     }
 
     

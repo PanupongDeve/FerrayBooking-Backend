@@ -1,5 +1,6 @@
 
 const HomeController = require('./HomeController');
+const PaymentController = require('./PaymentController');
 
 class MysqlController {
     constructor() {
@@ -15,6 +16,7 @@ class MysqlController {
     mount() {
         console.log('\x1b[31m', 'System:', '\x1b[37m', 'Initial Controller has been established successfully.');
         this.app.use('/', HomeController(this.io));
+        this.app.use('/payments', PaymentController(this.io));
     }
 }
 

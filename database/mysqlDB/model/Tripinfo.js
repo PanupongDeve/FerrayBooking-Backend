@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         partner_name: { // ข้อมูลของเจ้าของเรือ
-            field: 'soft_delete',
+            field: 'partner_name',
             type: DataTypes.STRING(191),
             allowNull: true
         },
