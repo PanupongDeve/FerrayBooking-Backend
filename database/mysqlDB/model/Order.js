@@ -17,8 +17,13 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(191),
             allowNull: true
         },
-        county_code: {
-            field: 'county_code',
+        country_code: {
+            field: 'country_code',
+            type: DataTypes.STRING(191),
+            allowNull: true,
+        },
+        email: {
+            field: 'email',
             type: DataTypes.STRING(191),
             allowNull: true,
         },

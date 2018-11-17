@@ -51,6 +51,7 @@ class Mysql {
 
     async mountModel(sequelize, DataTypes) {
         const model = {};
+        model.sequelize = sequelize;
         model.orders = require('./model/Order')(sequelize, DataTypes);
         model.tripinfos = require('./model/Tripinfo')(sequelize, DataTypes);
         model.pickups = require('./model/Pickup')(sequelize, DataTypes);

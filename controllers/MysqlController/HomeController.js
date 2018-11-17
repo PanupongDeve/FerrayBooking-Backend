@@ -3,7 +3,6 @@ const router = express.Router()
 const BaseController = require('./BaseController');
 const enumTypes = require('../../enum');
 const Middlewares = require('../../middlewares');
-const UserDTO = require('../../class/dto/UserDTO');
 const FileManager = require('../../class/FileManager');
 const AuthLayer = require('../../class/AuthLayer');
 const authLayer = new AuthLayer();
@@ -23,11 +22,6 @@ class HomeController extends BaseController {
 
     async enum(req, res) {
         this.ApiResponse.success(enumTypes)(res);
-    }
-
-    async getProfileFormToken(req, res) {
-        const user = new UserDTO(req.profile).toObject();
-        this.ApiResponse.success(user)(res);       
     }
 
     async upload(req, res) {

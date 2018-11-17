@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(191),
             allowNull: true
         },
-        amout: {
-            field: 'amout',
+        amount: {
+            field: 'amount',
             type: DataTypes.INTEGER(10),
             allowNull: true
         },
