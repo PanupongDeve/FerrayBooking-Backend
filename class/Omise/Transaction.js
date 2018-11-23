@@ -11,7 +11,7 @@ class Transaction extends BaseOmise {
     }
 
     async aliplay(options) {
-        return await this.connectBank(options, SourceType.aliplay)
+        return await this.connectBank(options, SourceType.alipay);
     }
 
     async scb(options) {

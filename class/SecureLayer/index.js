@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const path = require('path');
 const helmet = require('helmet');
 const session = require('express-session');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
@@ -10,6 +11,7 @@ const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 class SecureLayer {
 
     setMiddlewareWebApp(app) {
+        app.use(cors());
         app.use(helmet());
         app.disable('x-powered-by')
         app.use(morgan('dev', {

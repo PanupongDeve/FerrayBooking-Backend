@@ -3,15 +3,33 @@ const router = express.Router()
 const BaseController = require('./BaseController');
 const modelPromise = require('../../database/mysqlDB').model;
 const OrderDto = require('../../class/dto/OrderDTO');
+const Payment = require('../../class/Omise');
+
+const payments = new Payment();
 
 class OwnersController extends BaseController {
     constructor(io) {
         super(io)
         this.router = router;
+        this.router.post('/createTransactions', this.createTransaction.bind(this));
         this.router.get('/create', this.create.bind(this));
         this.router.get('/success', this.success.bind(this));
     }
 
+    async createTransaction(req ,res) {
+        try {
+            console.log(JSON.parse(req.body.data));
+            const options = {
+                amount: 300000,
+                return_uri: 'http://localhost:3000'
+            }
+
+            const charge = await payments.transaction.aliplay(options);
+            this.ApiResponse.redirect(res, charge.authorize_uri);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     async create(req, res) {
         const testData = {
