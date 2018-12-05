@@ -57,6 +57,9 @@ class Mysql {
         model.pickups = require('./model/Pickup')(sequelize, DataTypes);
         model.dropoffs = require('./model/Dropoff')(sequelize, DataTypes);
         model.payments = require('./model/Payment')(sequelize, DataTypes);
+        model.refund = require('./model/Refund')(sequelize, DataTypes);
+        model.ferry = require('./model/Ferry')(sequelize, DataTypes);
+        model.bus = require('./model/Bus')(sequelize, DataTypes);
 
         model.orderTripinfo = require('./model/OrderTripinfo')(sequelize, DataTypes);
         model.orderPickup = require('./model/OrderPickup')(sequelize, DataTypes);
@@ -80,7 +83,10 @@ class Mysql {
         await model.pickups.sync();
         await model.dropoffs.sync();
         await model.payments.sync();
-        
+        await model.refund.sync();
+        await model.ferry.sync();
+        await model.bus.sync();
+
         await model.orderTripinfo.sync();
         await model.orderPickup.sync();
         await model.orderDropoff.sync();

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('payments', {
+    return sequelize.define('buss', {
         id: {
             field: 'id',
             type: DataTypes.INTEGER(10),
@@ -7,23 +7,23 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             autoIncrement: true
         },
-        payment_type: {
-            field: 'payment_type',
+        bus_type: { // ชนิดของรถ
+            field: 'bus_type',
             type: DataTypes.STRING(191),
             allowNull: true
         },
-        charge_id: {
-            field: 'charge_id',
+        company_tour: { // บริษัททัวร์
+            field: 'company_tour',
             type: DataTypes.STRING(191),
             allowNull: true
         },
-        refund_id: {
-            field: 'refund_id',
+        zone: { // โซนที่ไปรับได้
+            field: 'zone',
             type: DataTypes.STRING(191),
             allowNull: true
         },
-        amount: {
-            field: 'amount',
+        price: { // ราคา
+            field: 'price',
             type: DataTypes.INTEGER(10),
             allowNull: true
         },

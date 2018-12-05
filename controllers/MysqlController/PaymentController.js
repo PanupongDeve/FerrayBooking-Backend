@@ -18,10 +18,25 @@ class OwnersController extends BaseController {
 
     async createTransaction(req ,res) {
         try {
-            console.log(JSON.parse(req.body.data));
+            // const {
+            //     order,
+            //     payment,
+            //     pickUp,
+            //     dropOff,
+            //     tripInfo
+            // }  = JSON.parse(req.body.data);
+
+            // req.session.paymentData = {
+            //     order,
+            //     payment,
+            //     pickUp,
+            //     dropOff,
+            //     tripInfo
+            // }
+            console.log(req.body);
             const options = {
                 amount: 300000,
-                return_uri: 'http://localhost:3000'
+                return_uri: 'http://localhost:3004/payments/success'
             }
 
             const charge = await payments.transaction.aliplay(options);
@@ -68,7 +83,7 @@ class OwnersController extends BaseController {
                 { model: model.payments }
             ] };
         const orders = await model.orders.findAll(query);
-        this.ApiResponse.success(orders)(res);
+        this.ApiResponse.success('success')(res);
     }
 }
 

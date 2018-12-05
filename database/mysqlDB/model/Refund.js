@@ -1,21 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('payments', {
+    return sequelize.define('refunds', {
         id: {
             field: 'id',
             type: DataTypes.INTEGER(10),
             primaryKey: true,
             allowNull: false,
             autoIncrement: true
-        },
-        payment_type: {
-            field: 'payment_type',
-            type: DataTypes.STRING(191),
-            allowNull: true
-        },
-        charge_id: {
-            field: 'charge_id',
-            type: DataTypes.STRING(191),
-            allowNull: true
         },
         refund_id: {
             field: 'refund_id',
